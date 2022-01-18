@@ -7,6 +7,13 @@ public abstract class Interacteble : MonoBehaviour
     protected bool active = false;
     public Interacteble NeededItem;
     public abstract void Activate();
-    public abstract void pickup();
+    private void OnMouseDown()
+    {
+        if (!active)
+        {
+            Activate();
+        }
+        
+    }
 
 }

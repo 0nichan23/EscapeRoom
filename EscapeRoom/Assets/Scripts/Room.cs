@@ -4,5 +4,15 @@ using UnityEngine;
 
 public class Room : MonoBehaviour
 {
-    public List<Interacteble> InteractableObjecs = new List<Interacteble>();
+    List<Interacteble> InteractableObjecs = new List<Interacteble>();
+
+    private void Start()
+    {
+        Interacteble[] objects = GetComponentsInChildren<Interacteble>();
+        for (int i = 0; i < objects.Length; i++)
+        {
+            InteractableObjecs.Add(objects[i]);
+        }
+        
+    }
 }

@@ -1,29 +1,29 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
+﻿using UnityEngine;
 public class Door : Interacteble
 {
+    Player player;
+
     public override void Activate()
     {
-        active = true;
-    }
-
-    private void Update()
-    {
-        if (active)
+        if (player.inventory.Contains(NeededItem))
         {
             Open();
-        }   
+        }
+        else
+        {
+            Debug.Log("didnt find key");
+        }
+
+    }
+    private void Start()
+    {
+        player = FindObjectOfType<Player>();
     }
 
     void Open()
     {
-        //opens door
+        Debug.Log("door opens");
+        active = true;
     }
 
-    public override void pickup()
-    {
-        Player.inventory.Add(this);
-    }
 }

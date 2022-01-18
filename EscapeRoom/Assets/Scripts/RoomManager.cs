@@ -4,14 +4,29 @@ using UnityEngine;
 
 public class RoomManager : MonoBehaviour
 {
-    List<Room> Rooms = new List<Room>();
+    public List<Room> Rooms = new List<Room>();
     public static RoomManager Instance = new RoomManager();
 
     private void Awake()
     {
-        if (Instance != null && Instance != this)
+        if (Instance == null)
         {
             Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
+
+    private void Start()
+    {
+        Room[] children = GetComponentsInChildren<Room>();
+        for (int i = 0; i < children.Length; i++)
+        {
+            Rooms.Add(children[i]);
         }
     }
 }
