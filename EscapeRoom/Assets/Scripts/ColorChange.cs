@@ -4,20 +4,24 @@ using UnityEngine;
 
 public class ColorChange : MonoBehaviour
 {
-    public GameManager gameManager;
-    public Renderer rend;
-    public GameObject drawner;
-    public GameObject secondDrawner;
+    private SpriteRenderer rend;
+    private GameObject key;
     bool drawnerOpen = false;
-    void Start()    
+    public Color _color;
+    public Color alphaColor;
+    public GameObject child;
+    void Awake()    
     {
-        rend = GetComponent<Renderer>();
+        rend = gameObject.GetComponent<SpriteRenderer>();
+        key = GameObject.Find("Key");
+        
     }
 
     void OnMouseEnter()
     {
-        rend.material.color = Color.red;
-
+        rend.material.color = _color;
+        if (gameObject.tag == "Picture")
+            key.SetActive(false);
     }
 
     void OnMouseOver()
@@ -30,21 +34,21 @@ public class ColorChange : MonoBehaviour
     private void OnMouseDown()
     {
         drawnerOpen = !drawnerOpen;
-        
         if (Input.GetMouseButton(0))
         {
-            if (drawnerOpen)
+            if (gameObject.tag == "Picture")
             {
-                drawner.SetActive(true);
-                secondDrawner.SetActive(true);
+                gameObject.AddComponent<Rigidbody>();
+                gameObject.transform.rotation = new Quaternion(-0.14f, 0.40f, 0.29f, 0.85f);
+                key.SetActive(true);
             }
-
-            else
+            if (gameObject.tag == "Case")
             {
-                drawner.SetActive(false);
-                secondDrawner.SetActive(false);
-
+                gameObject.GetComponent<SpriteRenderer>().color = alphaColor;
             }
+            child.SetActive(true);
+            
+            
         }
         
     }
