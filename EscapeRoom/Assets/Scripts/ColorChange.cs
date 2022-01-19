@@ -45,8 +45,10 @@ public class ColorChange : MonoBehaviour
             if (gameObject.tag == "Case")
             {
                 gameObject.GetComponent<SpriteRenderer>().color = alphaColor;
+                child.SetActive(true);
             }
-            child.SetActive(true);
+
+            
             
             
         }
