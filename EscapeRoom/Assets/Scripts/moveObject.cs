@@ -1,16 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class moveObject : MonoBehaviour
+public class moveObject : Interacteble
 {
- public float dragSpeed;
+    public float dragSpeed;
     private Vector3 dragOrigin;
     public bool cameraDragging = true;
     public float outerLeft = -10f;
     public float outerRight = 10f;
-
-    public GameObject hideingBehind;
+    public GameObject hiddenBehind;
     bool isToching;
     void Update()
     {
@@ -45,7 +42,7 @@ public class moveObject : MonoBehaviour
         }
         if (!isToching)
         {
-            hideingBehind.GetComponent<BoxCollider2D>().enabled = true;
+            hiddenBehind.GetComponent<BoxCollider2D>().enabled = true;
         }
     }
     private void OnCollisionStay(Collision collision)
@@ -58,5 +55,21 @@ public class moveObject : MonoBehaviour
         {
             isToching = true;
         }
+    }
+
+    void OnMouseEnter()
+    {
+        GetComponent<SpriteRenderer>().material.color = Color.green;
+    }
+
+    void OnMouseExit()
+    {
+
+        GetComponent<SpriteRenderer>().material.color = Color.white;
+
+    }
+
+    public override void Interact()
+    {
     }
 }

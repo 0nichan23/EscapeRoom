@@ -1,11 +1,23 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CameraManager : MonoBehaviour
+public class ViewManager : MonoBehaviour
 {
 
     public int current;
-
+    public static ViewManager Instance;
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
 
     private void Start()
     {
@@ -25,14 +37,13 @@ public class CameraManager : MonoBehaviour
         }
         if (current == RoomManager.Instance.Rooms.Count - 1)
         {
-            current = 0;
+            GameManager.Instance.winGame();
         }
         else
         {
             current++;
         }
         RoomManager.Instance.Rooms[current].gameObject.SetActive(true);
-
     }
     public void PreviousRoom()
     {
@@ -49,7 +60,5 @@ public class CameraManager : MonoBehaviour
             current--;
         }
         RoomManager.Instance.Rooms[current].gameObject.SetActive(true);
-
-
     }
 }

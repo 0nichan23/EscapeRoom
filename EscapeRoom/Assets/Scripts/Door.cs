@@ -3,7 +3,7 @@ public class Door : Interacteble
 {
     Player player;
 
-    public override void Activate()
+    public override void Interact()
     {
         if (player.inventory.Contains(NeededItem))
         {
@@ -13,8 +13,8 @@ public class Door : Interacteble
         {
             Debug.Log("didnt find key");
         }
-
     }
+
     private void Start()
     {
         player = FindObjectOfType<Player>();
@@ -24,6 +24,7 @@ public class Door : Interacteble
     {
         Debug.Log("door opens");
         active = true;
+        ViewManager.Instance.NextRoom();
     }
 
 }

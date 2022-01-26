@@ -9,7 +9,7 @@ public class Key : Interacteble
     {
         player = FindObjectOfType<Player>();
     }
-    public override void Activate()
+    public override void Interact()
     {
         pickup();
     }

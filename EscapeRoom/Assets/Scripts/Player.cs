@@ -15,7 +15,7 @@ public class Player : MonoBehaviour
     {
         if (inventory.Contains(interactable.NeededItem))
         {
-            interactable.Activate();
+            interactable.Interact();
         }
     }
 
