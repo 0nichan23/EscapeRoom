@@ -6,12 +6,12 @@ public class moveObject : MonoBehaviour
 {
  public float dragSpeed;
     private Vector3 dragOrigin;
-
     public bool cameraDragging = true;
-
     public float outerLeft = -10f;
     public float outerRight = 10f;
 
+    public GameObject hideingBehind;
+    bool isToching;
     void Update()
     {
         if (cameraDragging)
@@ -43,6 +43,20 @@ public class moveObject : MonoBehaviour
                 }
             }
         }
+        if (!isToching)
+        {
+            hideingBehind.GetComponent<BoxCollider2D>().enabled = true;
+        }
     }
-
+    private void OnCollisionStay(Collision collision)
+    {
+        if (collision.gameObject)
+        {
+            isToching = false;
+        }
+        else
+        {
+            isToching = true;
+        }
+    }
 }

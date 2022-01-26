@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ColorChange : MonoBehaviour
+public class EscapeConditions : MonoBehaviour
 {
     private SpriteRenderer rend;
     private GameObject key;
@@ -10,6 +10,7 @@ public class ColorChange : MonoBehaviour
     public Color _color;
     public Color alphaColor;
     public GameObject child;
+    public bool codeIsTrue = false;
     void Awake()    
     {
         rend = gameObject.GetComponent<SpriteRenderer>();
@@ -19,14 +20,14 @@ public class ColorChange : MonoBehaviour
 
     void OnMouseEnter()
     {
-        rend.material.color = _color;
+        rend.material.color = Color.green;
         if (gameObject.tag == "Picture")
             key.SetActive(false);
     }
 
     void OnMouseOver()
     {
-
+        
 
 
     }
@@ -44,10 +45,17 @@ public class ColorChange : MonoBehaviour
             }
             if (gameObject.tag == "Case")
             {
+                if (codeIsTrue)
+                {
+                    gameObject.GetComponent<SpriteRenderer>().color = alphaColor;
+                    child.SetActive(true);
+                }
+            }
+            if (gameObject.tag == "Normal")
+            {
                 gameObject.GetComponent<SpriteRenderer>().color = alphaColor;
                 child.SetActive(true);
             }
-
             
             
             
@@ -55,7 +63,6 @@ public class ColorChange : MonoBehaviour
         
     }
 
-    // ...and the mesh finally turns white when the mouse moves away.
     void OnMouseExit()
     {
         rend.material.color = Color.white;
