@@ -1,25 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
 using TMPro;
 
-public class NumPadCode : Interacteble
+
+public class numPadCode : Interacteble
 {
-    public string codeTextValue = "1352";
+    public string codeTextValue;
     public string passcode;
     public bool passCodeIsTrue = false;
     public Interacteble itemInside;
-    public TextMeshProUGUI codeGUI;
+    
     public void AddDigit(string digit)
     {
         codeTextValue += digit;
+        AudioManager.Instance.Play(gameObject.GetComponents<AudioSource>()[0].clip);
         Interact();
-    }
-
-    public void Update()
-    {
-        codeGUI.text = codeTextValue;
     }
     public override void Interact()
     {
@@ -28,16 +24,18 @@ public class NumPadCode : Interacteble
             if (codeTextValue == passcode)
             {
                 itemInside.gameObject.SetActive(true);
-
+                AudioManager.Instance.Play(gameObject.GetComponents<AudioSource>()[1].clip);
                 gameObject.GetComponent<ZoomIn>().MouseExit();
                 Destroy(gameObject.GetComponent<ZoomIn>());
+                
             }
             else
             {
                 codeTextValue = "";
+                AudioManager.Instance.Play(gameObject.GetComponent<AudioSource>().clip);
+                AudioManager.Instance.Play(gameObject.GetComponents<AudioSource>()[2].clip);
+
             }
         }
     }
-
-
 }

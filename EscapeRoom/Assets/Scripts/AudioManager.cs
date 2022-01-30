@@ -59,5 +59,4 @@ public class AudioManager : MonoBehaviour
 		EffectsSource.clip = clips[randomIndex];
 		EffectsSource.Play();
 	}
-
 }

@@ -12,11 +12,14 @@ public class Container : Interacteble
             if (player.inventory.Contains(NeededItem))
             {
                 Open();
+                AudioManager.Instance.Play(gameObject.GetComponent<AudioSource>().clip);
             }
+            
         }
         else
         {
             Open();
+            AudioManager.Instance.Play(gameObject.GetComponent<AudioSource>().clip);
         }
     }
     private void Start()
@@ -29,6 +32,7 @@ public class Container : Interacteble
         if (itemInside != null)
         {
             itemInside.gameObject.SetActive(true);
+            AudioManager.Instance.Play(gameObject.GetComponent<AudioSource>().clip);
         }
         else
         {

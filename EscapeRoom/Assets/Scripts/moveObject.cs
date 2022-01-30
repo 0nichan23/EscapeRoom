@@ -5,16 +5,17 @@ public class moveObject : Interacteble
     public float dragSpeed;
     private Vector3 dragOrigin;
     public bool passCodeIsTrue = false;
-    public float outerLeft = -10f;
-    public float outerRight = 10f;
+    public float outerLeft;
+    public float outerRight;
     public GameObject hiddenBehind;
     public bool onObject;
     Collider2D hasCol2D;
+    SpriteRenderer currentColor;
 
     private void Start()
     {
         onObject = false;
-
+        currentColor = GetComponent<SpriteRenderer>();
         hasCol2D = hiddenBehind.GetComponent<Collider2D>();
     }
     void Update()
@@ -29,6 +30,8 @@ public class moveObject : Interacteble
             if (Input.GetMouseButtonDown(1))
             {
                 dragOrigin = Input.mousePosition;
+                
+
                 return;
             }
 
@@ -39,15 +42,22 @@ public class moveObject : Interacteble
 
             if (move.x > 0f)
             {
-                if (this.transform.position.x < outerRight)
+                if (move.x > outerRight)
                 {
-                    transform.Translate(move, Space.World);
+                    if (this.transform.position.x < outerRight)
+                    {
+                        AudioManager.Instance.Play(gameObject.GetComponent<AudioSource>().clip);
+                        transform.Translate(move, Space.World);
+                    }
                 }
+
             }
             else
             {
+
                 if (this.transform.position.x > outerLeft)
                 {
+                    AudioManager.Instance.Play(gameObject.GetComponent<AudioSource>().clip);
                     transform.Translate(move, Space.World);
                 }
             }
@@ -60,7 +70,7 @@ public class moveObject : Interacteble
 
     void OnMouseEnter()
     {
-        GetComponent<SpriteRenderer>().material.color = Color.green;
+        currentColor.material.color = Color.green;
     }
 
     private void OnMouseOver()
@@ -69,11 +79,8 @@ public class moveObject : Interacteble
     }
     void OnMouseExit()
     {
-
-        GetComponent<SpriteRenderer>().material.color = Color.white;
+        currentColor.material.color = Color.white;
         onObject = false;
-
-
     }
 
     public override void Interact()

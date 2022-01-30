@@ -11,6 +11,7 @@ public class Door : Interacteble
         else
         {
             Debug.Log("didnt find key");
+            AudioManager.Instance.Play(gameObject.GetComponent<AudioSource>().clip);
         }
     }
 
@@ -24,6 +25,8 @@ public class Door : Interacteble
         Debug.Log("door opens");
         active = true;
         ViewManager.Instance.NextRoom();
+        AudioManager.Instance.Play(gameObject.GetComponents<AudioSource>()[1].clip);
+
     }
 
 }
