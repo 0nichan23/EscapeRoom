@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Key : Interacteble
+public class PickUpableObject : Interacteble
 {
     bool picked = false;
     Player player;

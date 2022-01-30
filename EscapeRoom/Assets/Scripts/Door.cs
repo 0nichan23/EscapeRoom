@@ -2,7 +2,6 @@
 public class Door : Interacteble
 {
     Player player;
-
     public override void Interact()
     {
         if (player.inventory.Contains(NeededItem))
