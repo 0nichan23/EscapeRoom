@@ -5,7 +5,7 @@ using UnityEngine;
 public class ZoomIn : MonoBehaviour
 {
     
-    public Vector3 defaultCameraPos;
+    private Vector3 defaultCameraPos;
     public Transform cameraZoom;
 
     private void Awake()
@@ -15,21 +15,28 @@ public class ZoomIn : MonoBehaviour
 
     void OnMouseEnter()
     {
-        Camera.main.transform.position =  cameraZoom.position;
-        Camera.main.orthographicSize = 0.37f;
+        MouseEnter();
     }
 
-    //private void OnMouseDown()
-    //{
-    //    if (Input.GetMouseButton(0))
-    //    {
-    //        GameManager.Instance.i = 3;
-    //    }
-    //}
 
     void OnMouseExit()
     {
+        MouseExit();
+    }
+
+    public void MouseExit()
+    {
+
         Camera.main.transform.position = defaultCameraPos;
         Camera.main.orthographicSize = 5;
+        Camera.main.GetComponent<CameraMovement>().enabled = true;
+    }
+
+    public void MouseEnter()
+    {
+        Camera.main.transform.position = cameraZoom.position;
+        Camera.main.orthographicSize = 0.45f;
+        Camera.main.GetComponent<CameraMovement>().enabled = false;
+
     }
 }

@@ -4,15 +4,27 @@ public class moveObject : Interacteble
 {
     public float dragSpeed;
     private Vector3 dragOrigin;
-    public bool cameraDragging = true;
+    public bool passCodeIsTrue = false;
     public float outerLeft = -10f;
     public float outerRight = 10f;
     public GameObject hiddenBehind;
-    bool isToching;
+    public bool onObject;
+    Collider2D hasCol2D;
+
+    private void Start()
+    {
+        onObject = false;
+
+        hasCol2D = hiddenBehind.GetComponent<Collider2D>();
+    }
     void Update()
     {
-        if (cameraDragging)
+        if (onObject)
         {
+            if (hasCol2D)
+            {
+                hasCol2D.enabled = false;
+            }
 
             if (Input.GetMouseButtonDown(1))
             {
@@ -40,20 +52,9 @@ public class moveObject : Interacteble
                 }
             }
         }
-        if (!isToching)
-        {
-            hiddenBehind.GetComponent<BoxCollider2D>().enabled = true;
-        }
-    }
-    private void OnCollisionStay(Collision collision)
-    {
-        if (collision.gameObject)
-        {
-            isToching = false;
-        }
         else
         {
-            isToching = true;
+            hasCol2D.enabled = true;
         }
     }
 
@@ -62,10 +63,16 @@ public class moveObject : Interacteble
         GetComponent<SpriteRenderer>().material.color = Color.green;
     }
 
+    private void OnMouseOver()
+    {
+        onObject = true;
+    }
     void OnMouseExit()
     {
 
         GetComponent<SpriteRenderer>().material.color = Color.white;
+        onObject = false;
+
 
     }
 

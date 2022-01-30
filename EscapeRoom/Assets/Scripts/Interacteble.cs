@@ -3,6 +3,7 @@
 public abstract class Interacteble : MonoBehaviour
 {
     protected bool active = false;
+    
     public Interacteble NeededItem;
     public abstract void Interact();
     private void OnMouseDown()
